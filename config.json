@@ -7,14 +7,14 @@
     "fb_url": "https://facebook.com/codingthunder",
     "tw_url": "https://twitter.com/codingthunder",
     "gh_url": "https://github.com/codingthunder",
-    "blog_name":"Coding Thunder",
-    "tag_line": "A Blog Liked By Programmers",
-    "about_text": "Hello!!!",
-    "number_of_posts": 2,
-    "login_img": "bootstrap-logo.svg",
+    "blog_name":"NEWS BUZZ",
+    "tag_line": "Keeps you Update!!!",
+    "about_text": "NEWS BUZZ is an online communication medium which is read all over the world...\n NEWS BUZZ publish publications,press releases,coloumns,articles,blogs which gives you a ride from your town to the world in a minute.",
+    "number_of_posts": 3,
+    "login_img": "logo.png",
     "admin_user": "muskan",
     "admin_password": "flask",
-    "upload_location": "E:\\pythonProject"
+    "upload_location": "E:\\pythonProject\\static\\img"
 
   }
 }

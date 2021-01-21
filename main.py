@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 import os
 import math
+url = "https://bing-news-search1.p.rapidapi.com/news/trendingtopics"
 with open('config.json','r') as c:
     params=json.load(c)['params']
 local_server=True
@@ -33,8 +34,8 @@ class Posts(db.Model):
     img_file = db.Column(db.String(120), nullable=True)
 @app.route('/')
 def home():
-    flash("Your entry is submitted")
-    flash("You can add another",'success')
+   # flash("Your entry is submitted")
+    #flash("You can add another",'success')
     posts=Posts.query.filter_by().all()
     last=math.ceil(len(posts)/int(params['number_of_posts']))
     #posts=posts

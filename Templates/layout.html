@@ -20,15 +20,29 @@
 
   <!-- Custom styles for this template -->
   <link href="{{url_for('static',filename='css/clean-blog.min.css')}}" rel="stylesheet">
+  <!--------hahajj------>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+  </style>
+<!--sckckksnckkkkkkkkcnknsssssssssss-->
+
 
 </head>
 
-<body>
+<body style="    background-color: #f2eef7;">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="/">{{params['blog_name']}}</a>
+      <a class="navbar-brand" href="/" ><img src="static\\img\\logo1.png" height="35px" width="35px"> {{params['blog_name']}}</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -36,7 +50,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" style="padding: 5px 7px, margin:4px 6px"  href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
@@ -49,7 +63,6 @@
       </div>
     </div>
   </nav>
-
   {% block body %}{% endblock %}
 
 
