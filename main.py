@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 import os
 import math
+import urllib.request
 url = "https://bing-news-search1.p.rapidapi.com/news/trendingtopics"
 with open('config.json','r') as c:
     params=json.load(c)['params']
@@ -102,6 +103,27 @@ def post_route(post_slug):
     post=Posts.query.filter_by(Slug=post_slug).first()
     return render_template('post.html',params=params,post=post)
 @app.route("/logout")
+@app.route('/topheadlines')
+def topheadlines():
+    with urllib.request.urlopen(
+            "https://newsapi.org/v2/top-headlines?country=in&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
+        data = json.loads(url.read())
+    topheadlines = data['articles']
+    return render_template('topheadlines.html', params=params,topheadlines=topheadlines)
+@app.route('/business')
+def business():
+    with urllib.request.urlopen(
+            "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
+        data = json.loads(url.read())
+    business= data['articles']
+    return render_template('business.html', params=params,business=business)
+@app.route('/tech')
+def tech():
+    with urllib.request.urlopen(
+            "http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
+        data = json.loads(url.read())
+    tech = data['articles']
+    return render_template('tech.html', params=params,tech=tech)
 def logout():
     session.pop('user')
     return redirect('/dashboard')

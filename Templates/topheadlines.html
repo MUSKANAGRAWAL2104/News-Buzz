@@ -1,0 +1,65 @@
+ {% extends "layout.html" %}
+
+{% block body %}
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="static\img\download (1).jpg" alt="Los Angeles" width="1100" height="500" style="-webkit-filter: blur(4px);">
+      
+    </div>
+    <div class="carousel-item">
+      <img src="static\img\10.jpg" alt="Chicago" width="1100" height="500" style="-webkit-filter: blur(2px);">
+         
+    </div>
+    <div class="carousel-item">
+      <img src="static\img\images.jpg" alt="New York" width="1100" height="500" style="-webkit-filter: blur(2px);">
+     
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+  <!--<div class="jumbotron jumbotron-fluid" style="background-color: #b5f3e2;
+    padding-top: 100px;">
+  <div class="container">
+    <h1 class="display-4">TOP HEADLINES</h1>
+    <p class="lead"></p>
+  </div>
+</div>
+
+<div class="container" style="max-width: 923px ;"> -->
+
+  	{% for post in topheadlines%}
+  	 <div class="post-preview">
+  	 	 <img src="{{post['urlToImage']}}" class="img-fluid" alt="Responsive image">
+          <a href="{{post['url']}}">
+            <h2 class="post-title">
+            	{{post['title']}}
+            </h2>
+            <h4 class="post-subtitle">
+            	{{post['description']}}
+            </h4>
+            
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Admin</a>
+            {{post['publishedAt']}}
+             </p>
+              
+           
+         </div>
+        <hr>
+       </a>
+    </li>    
+        {% endfor %}
+ </div>
+{% endblock %}
