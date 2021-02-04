@@ -12,14 +12,26 @@
       <img src="static\img\BHU.jpg" alt="Los Angeles" width="1100" height="500" style="-webkit-filter: blur(4px);">
       
     </div>
+          <div class="carousel-caption">
+        <h1 style= "font-size: 100px ; padding-bottom: 250px;;">{{params['blog_name']}}</h1>
+       
+      </div>   
     <div class="carousel-item">
       <img src="static\img\11.jpg" alt="Chicago" width="1100" height="500" style="-webkit-filter: blur(2px);">
          
     </div>
+          <div class="carousel-caption">
+        <h1 style= "font-size: 100px ; padding-bottom: 250px;;">{{params['blog_name']}}</h1>
+       
+      </div>   
     <div class="carousel-item">
       <img src="static\img\12.jpg" alt="New York" width="1100" height="500" style="-webkit-filter: blur(2px);">
      
     </div>
+          <div class="carousel-caption">
+        <h1 style= "font-size: 100px ; padding-bottom: 250px;;">{{params['blog_name']}}</h1>
+       
+      </div>   
   </div>
   <a class="carousel-control-prev" href="#demo" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
@@ -28,62 +40,157 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
-  <!-- Page Header -->
-  <!--<header class="masthead mb=0" style="background-image: url({{url_for('static',filename='img/home-bg.jpg')}})">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>{{params['blog_name']}}</h1>
-            <span class="subheading">{{params['tag_line']}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header> -->
-  <!-- Message flashing starts here !-->
-<!--{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-{% for category, message in messages %}
-<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-  {{message}}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  
-</div>
-{% endfor %}
-{% endif %}
-{% endwith %} -->
-  <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-      	<!--TODO: Fetch it using for loop from database -->
-        {% for post in posts %}
-        <div class="post-preview">
-          <a href="/post/{{post.Slug}}">
-            <h2 class="post-title">{{post.Title}}
-            </h2>
-            <h3 class="post-subtitle">
-              {{post.Tag_line}}
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Admin</a>
-            on {{post.Date}}</p>
-        </div>
-        {{post.Content[0:100]}}...
-        <hr>
-        {% endfor %}
-        <!-- Pager -->
-        <div class="clearfix">
-          
-          <a class="btn btn-primary float-left" href="{{prev}}">&larr;  Previous </a>
+  <div class="row">
 
-          <a class="btn btn-primary float-right" href="{{next}}">Next &rarr;</a>
-        </div>
-      </div>
-    </div>
+<div class="col-3 " >
+  
+<ul class="nav nav-pills" style=" position: sticky;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px
+  background-color: #f2eef7;
+   ;">
+<div class="col">
+  <div class="row">
+  <li class="nav-item" style="    margin-top: 20px;
+    padding-top: 20px;">
+   <a class="nav-link" href="/topheadlines">TOPHEADLINES</a>
+  </li>
+</div>
+<div class="row">
+  <li class="nav-item" style="    margin-top: 20px;
+    ;">
+    <a class="nav-link" href="/business">BUSINESS NEWS</a>
+  </li>
+</div>
+<div class="row">
+  <li class="nav-item" style=" margin-bottom: 20px;   margin-top: 20px;
+     ;">
+     <a class="nav-link"  aria-current="page" href="/tech">TECH NEWS</a>
+  </li>
+
+
+
+  {% for post in posts%}
+
+<div class="card" style="width: 18rem;">
+  <img src="static/img/{{post.img_file}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{post.Title}}</h5>
+    <p class="card-text"> {{post.Tag_line}}</p>
+    <a href="post/{{post.Slug}}" class="btn btn-primary">FULL NEWS</a>
   </div>
+</div>
+
+
+        {% endfor %}
+
+
+
+</div>
+
+</div>
+</ul>
+
+</div>
+
+
+<div class="col-8" style="max-width: 923px ;">
+  {% if i<3 %}
+        {% for post in topheadlines%}
+     <div class="post-preview">
+      
+          <a href="{{post['url']}}">
+            <h2 class="post-title">
+              {{post['title']}}
+            </h2>
+            <h4 class="post-subtitle">
+              {{post['description']}}
+            </h4>
+            
+          </a>
+           <img src="{{post['urlToImage']}}" class="img-fluid" alt="Responsive image">
+          <p class="post-meta">Posted by
+            <a href="#"> {{post['source']['name']}}</a>
+            {{post['publishedAt']}}
+             </p>
+              
+           
+         </div>
+        <hr>
+       </a>
+    </li>    
+        {% endfor %}
+        {% endif %}
+        {% if i>2 and i<6 %}
+        {% for post in business%}
+     <div class="post-preview">
+      
+          <a href="{{post['url']}}">
+            <h2 class="post-title">
+              {{post['title']}}
+            </h2>
+            <h4 class="post-subtitle">
+              {{post['description']}}
+            </h4>
+            
+          </a>
+          <img src="{{post['urlToImage']}}" class="img-fluid" alt="Responsive image">
+          <p class="post-meta">Posted by
+           <a href="#"> {{post['source']['name']}}</a>
+            {{post['publishedAt']}}
+             </p>
+              
+            
+         </div>
+        <hr>
+       </a>
+    </li>    
+        {% endfor %}
+         {% endif %}
+        {% if i>5 and i<9 %}
+        {% for post in tech%}
+     <div class="post-preview">
+       
+          <a href="{{post['url']}}">
+            <h2 class="post-title">
+              {{post['title']}}
+            </h2>
+            <h4 class="post-subtitle">
+              {{post['description']}}
+            </h4>
+            
+          </a>
+          <img src="{{post['urlToImage']}}" class="img-fluid" alt="Responsive image">
+          <p class="post-meta">Posted by
+            <a href="#"> {{post['source']['name']}}</a>
+            {{post['publishedAt']}}
+             </p>
+              
+           
+         </div>
+        <hr>
+       </a>
+    </li>    
+        {% endfor %}
+         {% endif %}
+
+        
+        <!-- Pager -->
+   
+ </div>
+ <div class="col">
+  </div>
+  </div>
+
+ </div>
+ </div>
+
+
+  <!-- Main Content -->
+ 
 {% endblock %}
   

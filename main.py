@@ -6,7 +6,6 @@ from datetime import datetime
 import os
 import math
 import urllib.request
-url = "https://bing-news-search1.p.rapidapi.com/news/trendingtopics"
 with open('config.json','r') as c:
     params=json.load(c)['params']
 local_server=True
@@ -35,26 +34,21 @@ class Posts(db.Model):
     img_file = db.Column(db.String(120), nullable=True)
 @app.route('/')
 def home():
-   # flash("Your entry is submitted")
-    #flash("You can add another",'success')
     posts=Posts.query.filter_by().all()
-    last=math.ceil(len(posts)/int(params['number_of_posts']))
-    #posts=posts
-    page = request.args.get('page')
-    if(not str(page).isnumeric()):
-        page=1
-    page=int(page)
-    posts=posts[(page-1)*int (params['number_of_posts']) : (page-1)*int(params['number_of_posts'])+int(params['number_of_posts'])]
-    if (page==1):
-        prev="#"
-        next="/?page=" + str(page+1)
-    elif(page == last):
-        prev = "/?page=" + str(page - 1)
-        next = '#'
-    else:
-        next = "/?page=" + str(page + 1)
-        prev = "/?page=" + str(page - 1)
-    return render_template('index.html', params=params, posts=posts , prev=prev , next=next)
+    for i in range(9):
+       if(i<3):
+           with urllib.request.urlopen("https://newsapi.org/v2/top-headlines?country=in&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
+               data = json.loads(url.read())
+           topheadlines = data['articles']
+       if(i>2 and i<6):
+           with urllib.request.urlopen("http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
+               data = json.loads(url.read())
+           business = data['articles']
+       if(i>5 and i<9):
+           with urllib.request.urlopen("http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
+               data = json.loads(url.read())
+           tech = data['articles']
+    return render_template('index.html', params=params,topheadlines=topheadlines,business=business,tech=tech,i=i,posts=posts)
 @app.route("/about")
 def about():
     return render_template('about.html',params=params)
@@ -105,25 +99,28 @@ def post_route(post_slug):
 @app.route("/logout")
 @app.route('/topheadlines')
 def topheadlines():
+    posts = Posts.query.filter_by().all()
     with urllib.request.urlopen(
             "https://newsapi.org/v2/top-headlines?country=in&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
         data = json.loads(url.read())
     topheadlines = data['articles']
-    return render_template('topheadlines.html', params=params,topheadlines=topheadlines)
+    return render_template('topheadlines.html', params=params,topheadlines=topheadlines,posts=posts)
 @app.route('/business')
 def business():
+    posts = Posts.query.filter_by().all()
     with urllib.request.urlopen(
             "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
         data = json.loads(url.read())
     business= data['articles']
-    return render_template('business.html', params=params,business=business)
+    return render_template('business.html', params=params,business=business,posts=posts)
 @app.route('/tech')
 def tech():
+    posts = Posts.query.filter_by().all()
     with urllib.request.urlopen(
             "http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=b25124c3cdcb4cccbcee8fd9f3ebc022") as url:
         data = json.loads(url.read())
     tech = data['articles']
-    return render_template('tech.html', params=params,tech=tech)
+    return render_template('tech.html', params=params,tech=tech,posts=posts)
 def logout():
     session.pop('user')
     return redirect('/dashboard')
